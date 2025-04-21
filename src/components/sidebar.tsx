@@ -25,16 +25,19 @@ const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <>
-      <h1 className="text-4xl text-blue-500 absolute top-8 font-bold tracking-wide">
+      <h1 className="text-4xl text-blue-500 sm:block hidden absolute top-8 font-bold tracking-wide">
         Pokédex
       </h1>
-      <aside className="flex w-1/4 flex-col gap-4">
+      <aside className="flex h-96 sm:h-full w-full sm:w-1/3 lg:w-1/4 flex-col gap-4">
+      <h1 className="text-4xl text-blue-500 block sm:hidden font-bold tracking-wide">
+        Pokédex
+      </h1>
         <div className="sidebar-header w-full relative">
           <SearchIcon className="size-4 absolute top-1/2 left-3 -translate-y-1/2 text-zinc-500" />
           <input
             type="text"
             placeholder="E.g. 001 or Bulba..."
-            className="py-2 pl-10 pr-4 bg-zinc-800 w-full outline-none border border-zinc-700 text-slate-300 rounded-md"
+            className="py-2 pl-10 pr-4 bg-zinc-800 w-full outline-none border border-zinc-700 text-slate-300 rounded-md placeholder:text-sm lg:placeholder:text-base"
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
           />
@@ -45,7 +48,7 @@ const Sidebar: React.FC<SidebarProps> = ({
             return (
               <button
                 key={pokemonIndex}
-                className={`flex gap-2 hover:bg-zinc-700 transition-colors duration-200 w-full py-2 px-4 rounded-md cursor-pointer tracking-wide ${
+                className={`flex gap-2 hover:bg-zinc-700 transition-colors duration-200 w-full py-2 px-4 rounded-md cursor-pointer text-sm lg:text-base tracking-wide ${
                   selectedPokemon === pokemonIndex && "bg-zinc-700"
                 }`}
                 onClick={(e) => setSelectedPokemon(originalPokemonNumber)}

@@ -12,13 +12,7 @@ const PokeCard: React.FC<PokeCardProps> = ({ selectedPokemon }) => {
   const [loadingMoveDetails, setLoadingMoveDetails] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  const {
-    name: pokemonName,
-    stats,
-    types,
-    moves,
-    sprites,
-  } = pokemonData || {};
+  const { name: pokemonName, stats, types, moves, sprites } = pokemonData || {};
 
   const imageUrl = sprites?.other["official-artwork"].front_default;
   const spriteSheet = [
@@ -167,7 +161,7 @@ const PokeCard: React.FC<PokeCardProps> = ({ selectedPokemon }) => {
                 Name
               </span>
               <h3 className="text-teal-400 mt-1 capitalize text-3xl font-bold tracking-wide">
-                {moveDetails?.moveName.replace("-"," ")}
+                {moveDetails?.moveName.replace("-", " ")}
               </h3>
               <hr className="mt-6 text-teal-100 mb-2" />
               <span className="text-zinc-300 font-semibold tracking-wide">
@@ -196,24 +190,41 @@ const PokeCard: React.FC<PokeCardProps> = ({ selectedPokemon }) => {
           })}
         </div>
       </div>
-      <div className="main-container mt-5 w-full flex flex-row justify-between gap-12">
-        <div className="image-container cursor-pointer bg-zinc-700 rounded-lg p-4 w-[400px]">
+      <div className="main-container mt-5 w-full flex flex-col xl:flex-row justify-between gap-12">
+        <div className="image-container flex flex-col gap-4 cursor-pointer bg-zinc-700 rounded-lg p-4 w-full xl:w-[400px]">
           <img
             src={imageUrl as string}
             alt={pokemonName as string}
             className="w-full"
           />
+
+          <div className="sprites-container w-full flex justify-center gap-4">
+            {spriteSheet.map((sprite, spriteIndex) => {
+              return (
+                <div
+                  key={spriteIndex}
+                  className="sprite-item cursor-pointer w-16 bg-zinc-600 rounded-md"
+                >
+                  <img
+                    src={sprite as string}
+                    alt={`${pokemonName}-${spriteIndex}` as string}
+                    className="w-full"
+                  />
+                </div>
+              );
+            })}
+          </div>
         </div>
-        <div className="stats-container flex flex-col gap-4 w-[calc(100%-400px)]">
+        <div className="stats-container w-full flex flex-col gap-4 xl:w-[calc(100%-400px)]">
           <h3 className="text-slate-100 text-2xl font-semibold tracking-wide">
             Stats
           </h3>
-          <div className="stats-grid grid grid-cols-2 gap-4">
+          <div className="stats-grid grid grid-cols-2 md:grid-cols-3 xl:grid-cols-2 gap-4">
             {stats?.map((statData, statIndex) => {
               return (
                 <div
                   key={statIndex}
-                  className="stat-item cursor-pointer flex flex-col gap-2 w-full bg-zinc-700 rounded-md p-4"
+                  className="stat-item cursor-pointer flex flex-col justify-between gap-2 w-full bg-zinc-700 rounded-md p-4"
                 >
                   <span className="text-zinc-400 capitalize font-semibold">
                     {statData.stat.name.replace("-", " ")}
@@ -227,28 +238,12 @@ const PokeCard: React.FC<PokeCardProps> = ({ selectedPokemon }) => {
           </div>
         </div>
       </div>
-      <div className="sprites-container mt-4 w-[400px] flex justify-center gap-4">
-        {spriteSheet.map((sprite, spriteIndex) => {
-          return (
-            <div
-              key={spriteIndex}
-              className="sprite-item cursor-pointer w-16 bg-zinc-700 rounded-md"
-            >
-              <img
-                src={sprite as string}
-                alt={`${pokemonName}-${spriteIndex}` as string}
-                className="w-full"
-              />
-            </div>
-          );
-        })}
-      </div>
 
       <h3 className="text-slate-100 mt-12 text-2xl font-semibold tracking-wide">
         Moves
       </h3>
 
-      <div className="moves-container mt-4 w-full grid grid-cols-4 gap-4">
+      <div className="moves-container mt-4 w-full grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {moves?.map((moveData, moveIndex) => {
           return (
             <button
