@@ -248,7 +248,7 @@ const PokeCard: React.FC<PokeCardProps> = ({ selectedPokemon }) => {
           return (
             <button
               key={moveIndex}
-              className="move-card cursor-pointer bg-zinc-700 hover:bg-zinc-600 shadow-none hover:shadow-md hover:shadow-blue-300 transition-all duration-200 text-slate-100 p-4 capitalize rounded-md"
+              className="move-card cursor-pointer bg-zinc-700 hover:bg-zinc-600 active:bg-zinc-600 shadow-none hover:shadow-md hover:shadow-blue-300 transition-all duration-200 text-slate-100 p-4 capitalize rounded-md"
               onClick={(e) => {
                 setIsModalOpen(true);
                 fetchMoveDetails(moveData.move.name, moveData.move.url);
