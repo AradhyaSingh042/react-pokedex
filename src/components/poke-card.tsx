@@ -130,7 +130,7 @@ const PokeCard: React.FC<PokeCardProps> = ({ selectedPokemon }) => {
   }
 
   return (
-    <div className="poke-card w-fit sm:w-full sm:overflow-y-auto p-6 bg-zinc-800 rounded-lg">
+    <div className="poke-card sm:w-full sm:overflow-y-auto p-6 bg-zinc-800 rounded-lg">
       {isModalOpen && (
         <Modal handleModalClose={() => setIsModalOpen(false)}>
           {loadingMoveDetails ? (
